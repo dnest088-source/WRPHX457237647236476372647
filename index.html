@@ -328,9 +328,9 @@
 
     <!-- Cart & Payment Modal (Combined) -->
     <div id="cartModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 overflow-y-auto" style="backdrop-filter: blur(10px); background: rgba(0, 0, 0, 0.8);">
-        <div class="glass-card rounded-3xl p-8 max-w-2xl w-full border-2 border-green-500/30 relative my-8">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-3xl font-black logo-font glow-text-hero">CHECKOUT</h3>
+        <div class="glass-card rounded-3xl p-6 md:p-8 max-w-2xl w-full border-2 border-green-500/30 relative my-8 max-h-[95vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6 sticky top-0 glass-card p-4 -mx-6 md:-mx-8 -mt-6 md:-mt-8 rounded-t-3xl z-10">
+                <h3 class="text-2xl md:text-3xl font-black logo-font glow-text-hero">CHECKOUT</h3>
                 <button onclick="closeCart()" class="glass-card p-2 rounded-lg hover:scale-110 transition-all">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -340,28 +340,28 @@
 
             <!-- Timer Countdown -->
             <div id="timerSection" class="glass-card rounded-xl p-4 mb-6 border border-yellow-500/30 bg-yellow-500/5 hidden">
-                <div class="flex items-center justify-between mb-2">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mb-3">
                     <div class="flex items-center space-x-2">
                         <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        <span class="text-yellow-400 font-bold">Selesaikan pembayaran dalam:</span>
+                        <span class="text-yellow-400 font-bold text-sm sm:text-base">Selesaikan pembayaran dalam:</span>
                     </div>
-                    <div id="countdown" class="text-3xl font-black text-yellow-400 font-mono">15:00</div>
+                    <div id="countdown" class="text-4xl font-black text-yellow-400 font-mono">15:00</div>
                 </div>
-                <div class="w-full bg-gray-700 rounded-full h-2">
-                    <div id="timerBar" class="bg-gradient-to-r from-yellow-400 to-orange-500 h-2 rounded-full transition-all duration-1000" style="width: 100%"></div>
+                <div class="w-full bg-gray-700 rounded-full h-3">
+                    <div id="timerBar" class="bg-gradient-to-r from-yellow-400 to-orange-500 h-3 rounded-full transition-all duration-1000" style="width: 100%"></div>
                 </div>
             </div>
             
             <!-- Order Summary -->
-            <div class="glass-card rounded-xl p-6 mb-6 border border-green-500/30">
-                <h4 class="font-bold text-xl mb-4 text-green-400">🛒 Keranjang Belanja</h4>
-                <div id="cartItems" class="space-y-4 mb-4 max-h-60 overflow-y-auto">
+            <div class="glass-card rounded-xl p-4 md:p-6 mb-6 border border-green-500/30">
+                <h4 class="font-bold text-lg md:text-xl mb-4 text-green-400">🛒 Keranjang Belanja</h4>
+                <div id="cartItems" class="space-y-3 mb-4 max-h-48 overflow-y-auto">
                     <!-- Cart items will be inserted here -->
                 </div>
                 <div class="border-t border-green-500/30 pt-4">
-                    <div class="flex justify-between text-2xl font-black">
+                    <div class="flex justify-between text-xl md:text-2xl font-black">
                         <span>TOTAL BAYAR:</span>
                         <span id="cartTotal" class="text-green-400">Rp 0</span>
                     </div>
@@ -369,11 +369,11 @@
             </div>
 
             <!-- QRIS Payment Section -->
-            <div id="qrisSection" class="hidden">
-                <div class="glass-card rounded-xl p-6 mb-6 border border-green-500/30 text-center">
-                    <h4 class="font-bold text-xl mb-4 text-green-400">📱 Scan QRIS untuk Bayar</h4>
-                    <div class="bg-white p-4 rounded-xl inline-block mb-4">
-                        <img src="https://res.cloudinary.com/dsjctfzj1/image/upload/v1760831917/WhatsApp_Image_2025-09-25_at_18.29.47_dvub5y.jpg" alt="QRIS WarpahVVIP" class="w-64 h-auto mx-auto">
+            <div id="qrisSection" class="hidden space-y-4 md:space-y-6">
+                <div class="glass-card rounded-xl p-4 md:p-6 border border-green-500/30 text-center">
+                    <h4 class="font-bold text-lg md:text-xl mb-4 text-green-400">📱 Scan QRIS untuk Bayar</h4>
+                    <div class="bg-white p-3 md:p-4 rounded-xl inline-block mb-4">
+                        <img src="https://res.cloudinary.com/dsjctfzj1/image/upload/v1760831917/WhatsApp_Image_2025-09-25_at_18.29.47_dvub5y.jpg" alt="QRIS WarpahVVIP" class="w-48 md:w-64 h-auto mx-auto">
                     </div>
                     <div class="space-y-2 text-sm">
                         <p class="text-gray-300">Nama: <strong class="text-white">WarpahVVIP</strong></p>
@@ -383,9 +383,9 @@
                 </div>
 
                 <!-- Payment Instructions -->
-                <div class="glass-card rounded-xl p-6 mb-6 border border-yellow-500/30 bg-yellow-500/5">
-                    <h4 class="font-bold text-lg mb-3 text-yellow-400">⚠️ Cara Pembayaran:</h4>
-                    <ol class="space-y-2 text-sm text-gray-300">
+                <div class="glass-card rounded-xl p-4 md:p-6 border border-yellow-500/30 bg-yellow-500/5">
+                    <h4 class="font-bold text-base md:text-lg mb-3 text-yellow-400">⚠️ Cara Pembayaran:</h4>
+                    <ol class="space-y-2 text-xs md:text-sm text-gray-300">
                         <li class="flex items-start">
                             <span class="text-green-400 font-bold mr-2">1.</span>
                             <span>Scan QRIS dengan e-wallet/m-banking Anda</span>

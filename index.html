@@ -1033,7 +1033,7 @@
                 showNotification('⚠️ Gagal kirim ke Discord, tapi akan tetap ke WhatsApp', 'error');
             }
             
-            // Tetap kirim ke WhatsApp sebagai backup
+            // Buat pesan WhatsApp
             const orderDetails = cart.map(item => 
                 `${item.quantity}x ${item.name} (Rp ${(item.price * item.quantity).toLocaleString('id-ID')})`
             ).join('%0A');
@@ -1049,16 +1049,19 @@
             if (customerNote) message += `%0A📝 *Catatan:* ${customerNote}%0A`;
             message += '%0A_Mohon dicek dan konfirmasi ya kak! 🙏_';
             
-            const waUrl = `https://wa.me/6288223055352?text=${message}`;
-            window.open(waUrl, '_blank');
-            
-            showNotification('✅ Mengarahkan ke WhatsApp...', 'success');
-            
+            // Tunggu sebentar lalu buka WhatsApp
             setTimeout(() => {
-                closeCart();
-                cart = [];
-                updateCartUI();
-            }, 2000);
+                const waUrl = `https://wa.me/6288223055352?text=${message}`;
+                window.open(waUrl, '_blank');
+                showNotification('✅ Mengarahkan ke WhatsApp...', 'success');
+                
+                // Reset form setelah redirect
+                setTimeout(() => {
+                    closeCart();
+                    cart = [];
+                    updateCartUI();
+                }, 1500);
+            }, 1500);
         });
 
         document.getElementById('cartBtn').addEventListener('click', openCart);

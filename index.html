@@ -665,9 +665,33 @@
         // Discord Webhook URL
         const DISCORD_WEBHOOK_URL = 'https://discordapp.com/api/webhooks/1429280910599131176/7APkozBYvRPrK0ZLLVfV2liztpua2s_HLJqqhpRRWHywVE5UK77Ffbbd9ehKrgTCt7Ah';
 
+        // Fungsi untuk sensor data
+        function censorPhone(phone) {
+            // Sensor nomor WA: 628123456789 -> 628****6789
+            if (!phone) return '-';
+            const length = phone.length;
+            if (length <= 6) return phone;
+            return phone.substring(0, 3) + '****' + phone.substring(length - 4);
+        }
+
+        function censorEmail(email) {
+            // Sensor email: user@gmail.com -> us**@gmail.com
+            if (!email) return '-';
+            const parts = email.split('@');
+            if (parts.length !== 2) return email;
+            const username = parts[0];
+            const domain = parts[1];
+            if (username.length <= 2) return email;
+            return username.substring(0, 2) + '**@' + domain;
+        }
+
         // Fungsi untuk kirim ke Discord
         async function sendToDiscord(customerData, cartData, totalAmount, proofFile) {
             const formData = new FormData();
+            
+            // Sensor data sensitif
+            const censoredPhone = censorPhone(customerData.phone);
+            const censoredEmail = censorEmail(customerData.email);
             
             // Buat embed message yang keren
             const embed = {
@@ -676,7 +700,7 @@
                 fields: [
                     {
                         name: "👤 Data Customer",
-                        value: `**Nama:** ${customerData.name}\n**WA:** ${customerData.phone}\n**Email:** ${customerData.email || '-'}`,
+                        value: `**Nama:** ${customerData.name}\n**WA:** ${censoredPhone}\n**Email:** ${censoredEmail}`,
                         inline: false
                     },
                     {
